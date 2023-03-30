@@ -61,6 +61,8 @@ app.use(
   })
 );
 
+app.use('/files', express.static('files'))
+
 app.use("/book", bookRoute);
 
 //if the request are not go in any route

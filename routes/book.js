@@ -27,7 +27,6 @@ router.get("/getBook", (req, res, next) => {
 
 router.post(
   "/createBook",
-  // uploadCover.single("cover"),
   upload.fields([
     {
       name: "pdf",
@@ -40,7 +39,6 @@ router.post(
   ]),
   async (req, res, next) => {
     try{const { writer, readTime, details } = req.body;
-    console.log(req.files);
 
     let star = new Star({
       one: 0,
@@ -54,8 +52,8 @@ router.post(
 
     let book = new Book({
       title: req.body.title,
-      cover: `${__dirname}/files/${req.files.cover[0].filename}`,
-      pdf: `${__dirname}/files/${req.files.pdf[0].filename}`,
+      cover: req.files.cover[0].path,
+      pdf: req.files.pdf[0].path,
       writer: writer,
       readTime: readTime,
       details: details,
